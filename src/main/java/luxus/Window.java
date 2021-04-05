@@ -52,8 +52,8 @@ public class Window {
         this._title = "Welcome to the Luxus Engine!";
 
         r = 1f;
-        g = 0f;
-        b = 0f;
+        g = 1f;
+        b = 1f;
         a = 1f;
     }
 
@@ -68,10 +68,11 @@ public class Window {
         switch (newScene) {
             case 0:
                 currentScene = new LevelEditorScene();
-                // CURRENT_SCENE.init();
+                currentScene.init();
                 break;
             case 1:
                 currentScene = new LevelScene();
+                currentScene.init();
                 break;
             default:
                 assert false : "Unknown Scene '" + newScene + "'!";
