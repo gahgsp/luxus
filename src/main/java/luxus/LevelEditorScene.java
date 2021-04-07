@@ -31,7 +31,6 @@ public class LevelEditorScene extends Scene {
                 this.addGameObjectToScene(gameObject);
             }
         }
-
     }
 
     @Override

@@ -2,6 +2,7 @@ package luxus.renderer;
 
 import luxus.Window;
 import luxus.components.SpriteRenderer;
+import luxus.utils.AssetPool;
 import org.joml.Vector4f;
 
 import static org.lwjgl.opengl.GL11.GL_FLOAT;
@@ -44,8 +45,7 @@ public class RenderBatch {
     public RenderBatch(int maxBatchSize) {
         this._maxBatchSize = maxBatchSize;
 
-        this._shader = new Shader("assets/shaders/default.glsl");
-        this._shader.compile();
+        this._shader = AssetPool.getShader("assets/shaders/default.glsl");
 
         this._sprites = new SpriteRenderer[this._maxBatchSize];
 
