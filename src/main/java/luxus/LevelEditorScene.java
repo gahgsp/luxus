@@ -1,6 +1,7 @@
 package luxus;
 
 import luxus.camera.Camera;
+import luxus.components.SpriteRenderer;
 import luxus.renderer.Shader;
 import luxus.renderer.Texture;
 import luxus.utils.Time;
@@ -47,10 +48,17 @@ public class LevelEditorScene extends Scene {
 
     private Texture _testTexture;
 
+    private GameObject _testGameObject;
+
     public LevelEditorScene() {}
 
     @Override
     public void init() {
+        System.out.println("Creating a Game Object!");
+        this._testGameObject = new GameObject("Test Game Object");
+        this._testGameObject.addComponent(new SpriteRenderer());
+        this.addGameObjectToScene(this._testGameObject);
+
         _camera = new Camera(new Vector2f(-200, -300));
         // Accessing and loading the Shader file.
         _defaultShader = new Shader("assets/shaders/default.glsl");
@@ -126,5 +134,7 @@ public class LevelEditorScene extends Scene {
         glDisableVertexAttribArray(1);
         glBindVertexArray(0);
         _defaultShader.detach();
+
+        this.gameObjects.forEach(gameObject -> gameObject.update(deltaTime));
     }
 }
