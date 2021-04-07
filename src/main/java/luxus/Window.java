@@ -47,8 +47,8 @@ public class Window {
     float r, g, b, a = 0f;
 
     private Window() {
-        this._width = 1366;
-        this._height = 768;
+        this._width = 1920;
+        this._height = 1080;
         this._title = "Welcome to the Luxus Engine!";
 
         r = 1f;
@@ -79,6 +79,10 @@ public class Window {
             default:
                 assert false : "Unknown Scene '" + newScene + "'!";
         }
+    }
+
+    public static Scene getCurrentScene() {
+        return currentScene;
     }
 
     public void run() {

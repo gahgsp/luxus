@@ -8,9 +8,18 @@ public class GameObject {
     private String _name;
     private List<Component> _components;
 
+    public Transform transform;
+
     public GameObject(String name) {
         this._name = name;
         this._components = new ArrayList<>();
+        this.transform = new Transform();
+    }
+
+    public GameObject(String name, Transform transform) {
+        this._name = name;
+        this._components = new ArrayList<>();
+        this.transform = transform;
     }
 
     public void addComponent(Component component) {

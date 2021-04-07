@@ -1,11 +1,14 @@
 package luxus;
 
 import luxus.camera.Camera;
+import luxus.renderer.Renderer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Scene {
+
+    protected Renderer renderer;
 
     protected Camera _camera;
     protected List<GameObject> gameObjects;
@@ -15,6 +18,7 @@ public abstract class Scene {
 
     public Scene() {
         this.gameObjects = new ArrayList<>();
+        this.renderer = new Renderer();
     }
 
     public void init() {}
@@ -22,6 +26,7 @@ public abstract class Scene {
     public void start() {
         for (GameObject gameObject : this.gameObjects) {
             gameObject.start();
+            this.renderer.add(gameObject);
         }
         _isRunning = true;
     }
@@ -34,7 +39,12 @@ public abstract class Scene {
         } else {
             this.gameObjects.add(gameObject);
             gameObject.start();
+            this.renderer.add(gameObject);
         }
+    }
+
+    public Camera getCamera() {
+        return this._camera;
     }
 
 }
