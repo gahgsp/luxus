@@ -1,6 +1,9 @@
 package luxus;
 
+import luxus.camera.Camera;
 import luxus.renderer.Shader;
+import luxus.utils.Time;
+import org.joml.Vector2f;
 import org.lwjgl.BufferUtils;
 
 import java.nio.FloatBuffer;
@@ -26,9 +29,9 @@ public class LevelEditorScene extends Scene {
 
     private float[] _verticesArray = {
             // Position             // Color
-            0.5f, -0.5f, 0.0f,      1.0f, 0.0f, 0.0f, 1.0f, // Bottom Right
-            -0.5f, 0.5f, 0.0f,      0.0f, 1.0f, 0.0f, 1.0f, // Top Left
-            0.5f, 0.5f, 0.0f,       0.0f, 0.0f, 1.0f, 1.0f, // Top Right
+            100.5f, -0.5f, 0.0f,      1.0f, 0.0f, 0.0f, 1.0f, // Bottom Right
+            -0.5f, 100.5f, 0.0f,      0.0f, 1.0f, 0.0f, 1.0f, // Top Left
+            100.5f, 100.5f, 0.0f,       0.0f, 0.0f, 1.0f, 1.0f, // Top Right
             -0.5f, -0.5f, 0.0f,     1.0f, 1.0f, 0.0f, 1.0f // Bottom Left
     };
     // DISCLAIMER: Must be in "counter-clockwise" order!
@@ -43,6 +46,7 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void init() {
+        _camera = new Camera(new Vector2f());
         // Accessing and loading the Shader file.
         _defaultShader = new Shader("assets/shaders/default.glsl");
         _defaultShader.compile();
@@ -86,7 +90,12 @@ public class LevelEditorScene extends Scene {
 
     @Override
     public void update(float deltaTime) {
+        _camera.getPosition().x -= deltaTime * 50f;
+
         _defaultShader.use();
+        _defaultShader.uploadMat4f("uProjection", _camera.getProjectionMatrix());
+        _defaultShader.uploadMat4f("uView", _camera.getViewMatrix());
+        _defaultShader.uploadFloat("uTime", Time.getTime());
 
         // Binding the VAO.
         glBindVertexArray(_vaoId);

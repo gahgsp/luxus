@@ -1,6 +1,10 @@
 package luxus;
 
+import luxus.camera.Camera;
+
 public abstract class Scene {
+
+    protected Camera _camera;
 
     public Scene() {}
 

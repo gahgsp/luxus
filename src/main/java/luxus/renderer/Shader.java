@@ -1,6 +1,11 @@
 package luxus.renderer;
 
+import org.joml.Matrix4f;
+import org.joml.Vector4f;
+import org.lwjgl.BufferUtils;
+
 import java.io.IOException;
+import java.nio.FloatBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -18,8 +23,12 @@ import static org.lwjgl.opengl.GL20.glGetProgramInfoLog;
 import static org.lwjgl.opengl.GL20.glGetProgrami;
 import static org.lwjgl.opengl.GL20.glGetShaderInfoLog;
 import static org.lwjgl.opengl.GL20.glGetShaderi;
+import static org.lwjgl.opengl.GL20.glGetUniformLocation;
 import static org.lwjgl.opengl.GL20.glLinkProgram;
 import static org.lwjgl.opengl.GL20.glShaderSource;
+import static org.lwjgl.opengl.GL20.glUniform1f;
+import static org.lwjgl.opengl.GL20.glUniform4f;
+import static org.lwjgl.opengl.GL20.glUniformMatrix4fv;
 import static org.lwjgl.opengl.GL20.glUseProgram;
 
 public class Shader {
@@ -28,6 +37,7 @@ public class Shader {
     private String _vertexSource;
     private String _fragmentSource;
     private String _filePath;
+    private boolean beingUsed;
 
     public Shader(String filePath) {
         this._filePath = filePath;
@@ -117,15 +127,41 @@ public class Shader {
             System.err.println(glGetProgramInfoLog(_shaderProgramId, length));
             assert false : "";
         }
-
     }
 
     public void use() {
-        // Binding our shader program.
-        glUseProgram(_shaderProgramId);
+        if (!beingUsed) {
+            // Binding our shader program.
+            glUseProgram(_shaderProgramId);
+            beingUsed = true;
+        }
     }
 
     public void detach() {
         glUseProgram(0);
+        beingUsed = false;
+    }
+
+    public void uploadMat4f(String variableName, Matrix4f mat4) {
+        int varLocation = glGetUniformLocation(_shaderProgramId, variableName);
+        // Making sure that we are using the shader!
+        use();
+        FloatBuffer matBuffer = BufferUtils.createFloatBuffer(16);
+        mat4.get(matBuffer);
+        glUniformMatrix4fv(varLocation, false, matBuffer);
+    }
+
+    public void uploadVec4f(String variableName, Vector4f vec4f) {
+        int varLocation = glGetUniformLocation(_shaderProgramId, variableName);
+        // Making sure that we are using the shader!
+        use();
+        glUniform4f(varLocation, vec4f.x, vec4f.y, vec4f.z, vec4f.w);
+    }
+
+    public void uploadFloat(String variableName, float value) {
+        int varLocation = glGetUniformLocation(_shaderProgramId, variableName);
+        // Making sure that we are using the shader!
+        use();
+        glUniform1f(varLocation, value);
     }
 }
