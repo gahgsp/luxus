@@ -67,7 +67,7 @@ public class Window {
     public static void changeScene(int newScene) {
         switch (newScene) {
             case 0:
-                currentScene = new LevelEditorScene();
+                currentScene = new DemoScene();
                 currentScene.init();
                 currentScene.start();
                 break;
