@@ -5,7 +5,6 @@ import luxus.listener.MouseListener;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
-import luxus.utils.Time;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.GLFW_FALSE;
@@ -16,6 +15,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_VISIBLE;
 import static org.lwjgl.glfw.GLFW.glfwCreateWindow;
 import static org.lwjgl.glfw.GLFW.glfwDefaultWindowHints;
 import static org.lwjgl.glfw.GLFW.glfwDestroyWindow;
+import static org.lwjgl.glfw.GLFW.glfwGetTime;
 import static org.lwjgl.glfw.GLFW.glfwInit;
 import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
 import static org.lwjgl.glfw.GLFW.glfwPollEvents;
@@ -149,8 +149,8 @@ public class Window {
     }
 
     private void loop() {
-        float frameBeginTime = Time.getTime();
-        float frameEndTime = Time.getTime();
+        float frameBeginTime = (float) glfwGetTime();
+        float frameEndTime;
         float deltaTime = -1f;
 
         while (!glfwWindowShouldClose(_glfwWindow)) {
@@ -166,7 +166,7 @@ public class Window {
 
             glfwSwapBuffers(_glfwWindow);
 
-            frameEndTime = Time.getTime();
+            frameEndTime = (float) glfwGetTime();
             deltaTime = frameEndTime - frameBeginTime;
             frameBeginTime = frameEndTime;
         }
