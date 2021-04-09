@@ -133,7 +133,7 @@ public class Window {
         glfwMakeContextCurrent(_glfwWindow);
 
         // Enabling / Disabling V-Sync.
-        glfwSwapInterval(0);
+        glfwSwapInterval(1);
 
         // Making the Window visible.
         glfwShowWindow(_glfwWindow);

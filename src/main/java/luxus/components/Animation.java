@@ -10,8 +10,8 @@ public class Animation extends Component {
     private boolean _isRunning;
     private float _elapsedTime;
     private float _numberOfFrames; // Can we get this accessing the Spritesheet?
-
     private int _currentSpriteIndex = 0;
+    private SpriteRenderer _spriteRenderer;
 
     public Animation(Spritesheet sprites, float animationSpeed, float numberOfFrames, boolean hasLoop) {
         this._sprites = sprites;
@@ -22,6 +22,11 @@ public class Animation extends Component {
 
     @Override
     public void start() {
+        this._spriteRenderer = gameObject.getComponent(SpriteRenderer.class);
+        if (this._spriteRenderer == null) {
+            this._spriteRenderer = new SpriteRenderer(this._sprites.getSprite(0));
+            gameObject.addComponent(this._spriteRenderer);
+        }
         this._isRunning = true;
     }
 

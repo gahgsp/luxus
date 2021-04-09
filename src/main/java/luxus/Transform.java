@@ -46,7 +46,7 @@ public class Transform {
 
     public void copy(Transform transform) {
         transform.setPosition(this.getPosition());
-        transform.setScale(this.getPosition());
+        transform.setScale(this.getScale());
     }
 
     @Override

@@ -51,14 +51,14 @@ public class GameObject {
     }
 
     public void start() {
-        for (Component component : this._components) {
-            component.start();
+        for (int index = 0; index < this._components.size(); index++) {
+            this._components.get(index).start();
         }
     }
 
     public void update(float deltaTime) {
-        for (Component component : this._components) {
-            component.update(deltaTime);
+        for (int index = 0; index < this._components.size(); index++) {
+            this._components.get(index).update(deltaTime);
         }
     }
 

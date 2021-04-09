@@ -2,7 +2,6 @@ package luxus;
 
 import luxus.camera.Camera;
 import luxus.components.Animation;
-import luxus.components.SpriteRenderer;
 import luxus.components.Spritesheet;
 import luxus.utils.AssetPool;
 import org.joml.Vector2f;
@@ -19,7 +18,7 @@ public class DemoScene extends Scene {
         Spritesheet spritesheet = AssetPool.getSpritesheet("assets/images/link.png");
 
         GameObject object1 = new GameObject("Object 1", new Transform(new Vector2f(100, 100), new Vector2f(64, 64)));
-        object1.addComponent(new SpriteRenderer(spritesheet.getSprite(0)));
+        // object1.addComponent(new SpriteRenderer(spritesheet.getSprite(0)));
         object1.addComponent(new Animation(spritesheet, 0.1f, 10,true));
         this.addGameObjectToScene(object1);
 
@@ -35,7 +34,9 @@ public class DemoScene extends Scene {
 
     @Override
     public void update(float deltaTime) {
-        this.gameObjects.forEach(gameObject -> gameObject.update(deltaTime));
+        for(int index = 0; index < this.gameObjects.size(); index++) {
+            this.gameObjects.get(index).update(deltaTime);
+        }
         this.renderer.render();
     }
 }

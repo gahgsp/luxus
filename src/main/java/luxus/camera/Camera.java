@@ -17,27 +17,27 @@ public class Camera {
     }
 
     public void adjustProjection() {
-        _projectionMatrix.identity();
-        _projectionMatrix.ortho(0f, 32f * 40f, 0f, 32f * 21f, 0f, 100f);
+        this._projectionMatrix.identity();
+        this._projectionMatrix.ortho(0f, 32f * 40f, 0f, 32f * 21f, 0f, 100f);
     }
 
     public Matrix4f getViewMatrix() {
         Vector3f cameraFront = new Vector3f(0f, 0f, -1f);
         Vector3f cameraUp = new Vector3f(0f, 1f, 0f);
-        _viewMatrix.identity();
-        _viewMatrix = _viewMatrix.lookAt(
-                new Vector3f(_position.x, _position.y, 20f), // Where the camera is now.
-                cameraFront.add(_position.x, _position.y, 0f), // Where is the center of the camera.
+        this._viewMatrix.identity();
+        this._viewMatrix = this._viewMatrix.lookAt(
+                new Vector3f(this._position.x, this._position.y, 20f), // Where the camera is now.
+                cameraFront.add(this._position.x, this._position.y, 0f), // Where is the center of the camera.
                 cameraUp);
-        return _viewMatrix;
+        return this._viewMatrix;
     }
 
     public Matrix4f getProjectionMatrix() {
-        return _projectionMatrix;
+        return this._projectionMatrix;
     }
 
     public Vector2f getPosition() {
-        return _position;
+        return this._position;
     }
 
     public void setPosition(Vector2f position) {
