@@ -7,19 +7,18 @@ public class GameObject {
 
     private String _name;
     private List<Component> _components;
-
-    public Transform transform;
+    private Transform _transform;
 
     public GameObject(String name) {
         this._name = name;
         this._components = new ArrayList<>();
-        this.transform = new Transform();
+        this._transform = new Transform();
     }
 
     public GameObject(String name, Transform transform) {
         this._name = name;
         this._components = new ArrayList<>();
-        this.transform = transform;
+        this._transform = transform;
     }
 
     public void addComponent(Component component) {
@@ -61,5 +60,9 @@ public class GameObject {
         for (Component component : this._components) {
             component.update(deltaTime);
         }
+    }
+
+    public Transform getTransform() {
+        return this._transform;
     }
 }

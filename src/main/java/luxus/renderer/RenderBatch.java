@@ -120,10 +120,20 @@ public class RenderBatch {
     }
 
     public void render() {
-        // For now, we will rebuffer all data every frame.
-        // TODO: This can be optmized!
-        glBindBuffer(GL_ARRAY_BUFFER, this._vboId);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, this._vertices);
+        boolean needToRebufferSprite = false;
+        for (int index = 0; index < this._numberOfSprites; index++) {
+            SpriteRenderer sprite = this._sprites[index];
+            if (sprite.isDirty()) {
+                loadVertexProperties(index);
+                sprite.cleanSpriteRenderer();
+                needToRebufferSprite = true;
+            }
+        }
+
+        if (needToRebufferSprite) {
+            glBindBuffer(GL_ARRAY_BUFFER, this._vboId);
+            glBufferSubData(GL_ARRAY_BUFFER, 0, this._vertices);
+        }
 
         // Making sure we use our shader!
         this._shader.use();
@@ -136,7 +146,6 @@ public class RenderBatch {
         this._shader.uploadIntArray("uTextures", this._textureSlots);
 
         glBindVertexArray(this._vaoId);
-
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
 
@@ -187,8 +196,8 @@ public class RenderBatch {
             }
 
             // Loads the position.
-            this._vertices[offset] = spriteRenderer.gameObject.transform.getPosition().x + (xAdd * spriteRenderer.gameObject.transform.getScale().x);
-            this._vertices[offset + 1] = spriteRenderer.gameObject.transform.getPosition().y + (yAdd * spriteRenderer.gameObject.transform.getScale().y);
+            this._vertices[offset] = spriteRenderer.gameObject.getTransform().getPosition().x + (xAdd * spriteRenderer.gameObject.getTransform().getScale().x);
+            this._vertices[offset + 1] = spriteRenderer.gameObject.getTransform().getPosition().y + (yAdd * spriteRenderer.gameObject.getTransform().getScale().y);
 
             // Loads the color.
             this._vertices[offset + 2] = color.x;
