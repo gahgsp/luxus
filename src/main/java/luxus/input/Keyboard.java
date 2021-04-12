@@ -1,21 +1,21 @@
-package luxus.listener;
+package luxus.input;
 
 import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 
-public class KeyboardListener {
+public class Keyboard {
 
-    private static KeyboardListener singletonInstance;
+    private static Keyboard singletonInstance;
 
     private boolean[] _keysPressed = new boolean[350];
 
-    private KeyboardListener() {}
+    private Keyboard() {}
 
-    public static KeyboardListener getInstance() {
-        if (KeyboardListener.singletonInstance == null) {
-            KeyboardListener.singletonInstance = new KeyboardListener();
+    public static Keyboard getInstance() {
+        if (Keyboard.singletonInstance == null) {
+            Keyboard.singletonInstance = new Keyboard();
         }
-        return KeyboardListener.singletonInstance;
+        return Keyboard.singletonInstance;
     }
 
     public static void keyCallback(long window, int key, int scanCode, int action, int mods) {

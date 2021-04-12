@@ -1,7 +1,7 @@
 package luxus;
 
-import luxus.listener.KeyboardListener;
-import luxus.listener.MouseListener;
+import luxus.input.Keyboard;
+import luxus.input.Mouse;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
@@ -122,12 +122,12 @@ public class Window {
         }
 
         // Registering the mouse listener.
-        glfwSetCursorPosCallback(_glfwWindow, MouseListener::mousePositionCallback);
-        glfwSetMouseButtonCallback(_glfwWindow, MouseListener::mouseButtonCallback);
-        glfwSetScrollCallback(_glfwWindow, MouseListener::mouseScrollCallback);
+        glfwSetCursorPosCallback(_glfwWindow, Mouse::mousePositionCallback);
+        glfwSetMouseButtonCallback(_glfwWindow, Mouse::mouseButtonCallback);
+        glfwSetScrollCallback(_glfwWindow, Mouse::mouseScrollCallback);
 
         // Registering keyboard listener.
-        glfwSetKeyCallback(_glfwWindow, KeyboardListener::keyCallback);
+        glfwSetKeyCallback(_glfwWindow, Keyboard::keyCallback);
 
         // Creating the OpenGL current context.
         glfwMakeContextCurrent(_glfwWindow);

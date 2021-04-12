@@ -1,18 +1,18 @@
-package luxus.listener;
+package luxus.input;
 
 import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 
-public class MouseListener {
+public class Mouse {
 
-    private static MouseListener singletonInstance = null;
+    private static Mouse singletonInstance = null;
 
     private double _scrollX, _scrollY;
     private double _xPos, _yPos, _lastX, _lastY;
     private boolean[] _mouseButtonsPressed = new boolean[3];
     private boolean _isDragging;
 
-    private MouseListener() {
+    private Mouse() {
         this._scrollX = 0.0;
         this._scrollY = 0.0;
         this._xPos = 0.0;
@@ -21,11 +21,11 @@ public class MouseListener {
         this._lastY = 0.0;
     }
 
-    public static MouseListener getInstance() {
-        if (MouseListener.singletonInstance == null) {
-            MouseListener.singletonInstance = new MouseListener();
+    public static Mouse getInstance() {
+        if (Mouse.singletonInstance == null) {
+            Mouse.singletonInstance = new Mouse();
         }
-        return MouseListener.singletonInstance;
+        return Mouse.singletonInstance;
     }
 
     public static void mousePositionCallback(long window, double xPos, double yPos) {
