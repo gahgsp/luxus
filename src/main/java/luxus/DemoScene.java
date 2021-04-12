@@ -2,6 +2,7 @@ package luxus;
 
 import luxus.camera.Camera;
 import luxus.components.Animation;
+import luxus.components.CharacterController;
 import luxus.components.Spritesheet;
 import luxus.utils.AssetPool;
 import org.joml.Vector2f;
@@ -21,7 +22,8 @@ public class DemoScene extends Scene {
         Spritesheet spritesheet = AssetPool.getSpritesheet("assets/images/link.png");
 
         GameObject object1 = new GameObject("Object 1", new Transform(new Vector2f(100, 100), new Vector2f(64, 64)));
-        object1.addComponent(new Animation(spritesheet, 0.1f, 10,true));
+        object1.addComponent(new Animation(spritesheet, 0.05f, 10,true));
+        object1.addComponent(new CharacterController());
         this.addGameObjectToScene(object1);
     }
 
