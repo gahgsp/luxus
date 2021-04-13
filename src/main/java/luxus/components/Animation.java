@@ -1,17 +1,11 @@
 package luxus.components;
 
-import luxus.Component;
-
-public class Animation extends Component {
+public class Animation {
 
     private Spritesheet _sprites;
     private float _animationSpeed;
     private boolean _hasLoop;
-    private boolean _isRunning;
-    private float _elapsedTime;
-    private float _numberOfFrames; // Can we get this accessing the Spritesheet?
-    private int _currentSpriteIndex = 0;
-    private SpriteRenderer _spriteRenderer;
+    private float _numberOfFrames;
 
     public Animation(Spritesheet sprites, float animationSpeed, float numberOfFrames, boolean hasLoop) {
         this._sprites = sprites;
@@ -20,31 +14,19 @@ public class Animation extends Component {
         this._hasLoop = hasLoop;
     }
 
-    @Override
-    public void start() {
-        this._spriteRenderer = gameObject.getComponent(SpriteRenderer.class);
-        if (this._spriteRenderer == null) {
-            this._spriteRenderer = new SpriteRenderer(this._sprites.getSprite(0));
-            gameObject.addComponent(this._spriteRenderer);
-        }
-        this._isRunning = true;
+    public Spritesheet getAnimationSpritesheet() {
+        return this._sprites;
     }
 
-    @Override
-    public void update(float deltaTime) {
-        if (this._isRunning) {
-            this._elapsedTime += deltaTime;
-            if (this._elapsedTime >= this._animationSpeed) {
-                this._elapsedTime = 0f;
-                gameObject.getComponent(SpriteRenderer.class).setSprite(this._sprites.getSprite(this._currentSpriteIndex++));
-                if (this._currentSpriteIndex >= this._numberOfFrames) {
-                    if (this._hasLoop) {
-                        this._currentSpriteIndex = 0;
-                    } else {
-                        this._isRunning = false;
-                    }
-                }
-            }
-        }
+    public float getAnimationSpeed() {
+        return this._animationSpeed;
+    }
+
+    public boolean hasLoop() {
+        return this._hasLoop;
+    }
+
+    public float getNumberOfFrames() {
+        return this._numberOfFrames;
     }
 }

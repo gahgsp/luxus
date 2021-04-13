@@ -12,10 +12,14 @@ public class Spritesheet {
     private List<Sprite> _sprites;
 
     public Spritesheet(Texture texture, int spriteWidth, int spriteHeight, int numberOfSprites, int spacing) {
+        this(texture, spriteWidth, spriteHeight, numberOfSprites, spacing, spriteHeight);
+    }
+
+    public Spritesheet(Texture texture, int spriteWidth, int spriteHeight, int numberOfSprites, int spacing, int startingY) {
         this._sprites = new ArrayList<>();
         this._texture = texture;
         int currentX = 0;
-        int currentY = this._texture.getHeight() - spriteHeight;
+        int currentY = this._texture.getHeight() - startingY;
         for (int index = 0; index < numberOfSprites; index++) {
             float topY = (currentY + spriteHeight) / (float) this._texture.getHeight();
             float rightX = (currentX + spriteWidth) / (float) this._texture.getWidth();

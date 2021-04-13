@@ -9,35 +9,58 @@ public class CharacterController extends Component {
 
     private Vector2f _position = new Vector2f(0f, 0f);
     private Vector2f _velocity = new Vector2f(100f, 100f);
+    private SpriteRenderer _spriteRenderer;
+
+    private boolean _hasHorizontalMovement;
+    private boolean _hasVerticalMovement;
 
     @Override
     public void start() {
         this._position = gameObject.getTransform().getPosition();
+        this._spriteRenderer = gameObject.getComponent(SpriteRenderer.class);
     }
 
     @Override
     public void update(float deltaTime) {
-        moveHorizontally(deltaTime);
-        moveVertically(deltaTime);
+        // No diagonal movement around here...
+        if (!this._hasVerticalMovement) {
+            moveHorizontally(deltaTime);
+        }
+        if (!this._hasHorizontalMovement) {
+            moveVertically(deltaTime);
+        }
+
+        // No movement? So we are idle...
+        if (!this._hasHorizontalMovement && !this._hasVerticalMovement) {
+            gameObject.getComponent(SpriteRenderer.class).playAnimation("Idle");
+        }
     }
 
     private void moveHorizontally(float deltaTime) {
-        gameObject.getTransform().getPosition().x = this._position.x;
         if (Keyboard.isKeyPressed(GLFW.GLFW_KEY_D)) {
-            gameObject.getTransform().getPosition().x += this._velocity.x * deltaTime;
-        }
-        if (Keyboard.isKeyPressed(GLFW.GLFW_KEY_A)) {
-            gameObject.getTransform().getPosition().x -= this._velocity.x * deltaTime;
+            this._position.x += this._velocity.x * deltaTime;
+            this._spriteRenderer.playAnimation("RightRunning");
+            this._hasHorizontalMovement = true;
+        } else if (Keyboard.isKeyPressed(GLFW.GLFW_KEY_A)) {
+            this._position.x -= this._velocity.x * deltaTime;
+            this._spriteRenderer.playAnimation("LeftRunning");
+            this._hasHorizontalMovement = true;
+        } else {
+            this._hasHorizontalMovement = false;
         }
     }
 
     private void moveVertically(float deltaTime) {
-        gameObject.getTransform().getPosition().y = this._position.y;
         if (Keyboard.isKeyPressed(GLFW.GLFW_KEY_W)) {
-            gameObject.getTransform().getPosition().y += this._velocity.y * deltaTime;
-        }
-        if (Keyboard.isKeyPressed(GLFW.GLFW_KEY_S)) {
-            gameObject.getTransform().getPosition().y -= this._velocity.y * deltaTime;
+            this._position.y += this._velocity.y * deltaTime;
+            this._spriteRenderer.playAnimation("TopRunning");
+            this._hasVerticalMovement = true;
+        } else if (Keyboard.isKeyPressed(GLFW.GLFW_KEY_S)) {
+            this._position.y -= this._velocity.y * deltaTime;
+            this._spriteRenderer.playAnimation("BottomRunning");
+            this._hasVerticalMovement = true;
+        } else {
+            this._hasVerticalMovement = false;
         }
     }
 }
