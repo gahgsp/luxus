@@ -1,7 +1,7 @@
 package luxus;
 
 import luxus.camera.Camera;
-import luxus.renderer.Renderer;
+import luxus.graphics.Renderer;
 
 import java.util.ArrayList;
 import java.util.List;

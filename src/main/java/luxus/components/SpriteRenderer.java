@@ -2,7 +2,9 @@ package luxus.components;
 
 import luxus.Component;
 import luxus.Transform;
-import luxus.renderer.Texture;
+import luxus.graphics.Animation;
+import luxus.graphics.Sprite;
+import luxus.graphics.Texture;
 import org.joml.Vector2f;
 import org.joml.Vector4f;
 

@@ -1,4 +1,4 @@
-package luxus.components;
+package luxus.graphics;
 
 public class Animation {
 

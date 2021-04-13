@@ -1,6 +1,5 @@
-package luxus.components;
+package luxus.graphics;
 
-import luxus.renderer.Texture;
 import org.joml.Vector2f;
 
 public class Sprite {

@@ -1,4 +1,4 @@
-package luxus.renderer;
+package luxus.graphics;
 
 import luxus.Window;
 import luxus.components.SpriteRenderer;

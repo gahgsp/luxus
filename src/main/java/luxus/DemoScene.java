@@ -1,10 +1,10 @@
 package luxus;
 
 import luxus.camera.Camera;
-import luxus.components.Animation;
+import luxus.graphics.Animation;
 import luxus.components.CharacterController;
 import luxus.components.SpriteRenderer;
-import luxus.components.Spritesheet;
+import luxus.graphics.Spritesheet;
 import luxus.utils.AssetPool;
 import org.joml.Vector2f;
 

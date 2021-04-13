@@ -1,4 +1,4 @@
-package luxus.renderer;
+package luxus.graphics;
 
 import org.lwjgl.BufferUtils;
 

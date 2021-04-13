@@ -1,7 +1,7 @@
 package luxus;
 
 import luxus.components.SpriteRenderer;
-import luxus.components.Spritesheet;
+import luxus.graphics.Spritesheet;
 import luxus.utils.AssetPool;
 import luxus.utils.MapUtils;
 import org.joml.Vector2f;

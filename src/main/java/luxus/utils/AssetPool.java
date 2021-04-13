@@ -1,8 +1,8 @@
 package luxus.utils;
 
-import luxus.components.Spritesheet;
-import luxus.renderer.Shader;
-import luxus.renderer.Texture;
+import luxus.graphics.Spritesheet;
+import luxus.graphics.Shader;
+import luxus.graphics.Texture;
 
 import java.io.File;
 import java.util.HashMap;

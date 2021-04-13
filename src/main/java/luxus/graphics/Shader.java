@@ -1,4 +1,4 @@
-package luxus.renderer;
+package luxus.graphics;
 
 import org.joml.Matrix4f;
 import org.joml.Vector4f;
