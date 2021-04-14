@@ -1,9 +1,10 @@
 package luxus;
 
 import luxus.camera.Camera;
-import luxus.graphics.Animation;
 import luxus.components.CharacterController;
+import luxus.components.Collider;
 import luxus.components.SpriteRenderer;
+import luxus.graphics.Animation;
 import luxus.graphics.Spritesheet;
 import luxus.utils.AssetPool;
 import org.joml.Vector2f;
@@ -46,12 +47,13 @@ public class DemoScene extends Scene {
         GameObject object1 = new GameObject("Object 1", new Transform(new Vector2f(100, 100), new Vector2f(64, 64)));
         object1.addComponent(new SpriteRenderer(playerAnimations));
         object1.addComponent(new CharacterController());
+        object1.addComponent(new Collider());
         this.addGameObjectToScene(object1);
     }
 
     @Override
     public void update(float deltaTime) {
-        for(int index = 0; index < this.gameObjects.size(); index++) {
+        for (int index = 0; index < this.gameObjects.size(); index++) {
             this.gameObjects.get(index).update(deltaTime);
         }
         this.renderer.render();
