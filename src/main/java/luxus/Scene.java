@@ -16,7 +16,6 @@ public abstract class Scene {
     private boolean _isRunning;
     private List<Collider> _collidersInScene;
 
-
     public Scene() {
         this.gameObjects = new ArrayList<>();
         this.renderer = new Renderer();
@@ -49,7 +48,6 @@ public abstract class Scene {
         if (gameObject.getComponent(Collider.class) != null) {
             this._collidersInScene.add(gameObject.getComponent(Collider.class));
         }
-
     }
 
     public Camera getCamera() {
