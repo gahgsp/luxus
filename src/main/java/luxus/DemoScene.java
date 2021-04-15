@@ -6,8 +6,10 @@ import luxus.components.Collider;
 import luxus.components.SpriteRenderer;
 import luxus.graphics.Animation;
 import luxus.graphics.Spritesheet;
+import luxus.input.Keyboard;
 import luxus.utils.AssetPool;
 import org.joml.Vector2f;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.HashMap;
 
@@ -53,6 +55,10 @@ public class DemoScene extends Scene {
 
     @Override
     public void update(float deltaTime) {
+        if (Keyboard.isKeyPressed(GLFW.GLFW_KEY_C)) {
+            this.setIsDebugMode(true);
+        }
+
         for (int index = 0; index < this.gameObjects.size(); index++) {
             this.gameObjects.get(index).update(deltaTime);
         }

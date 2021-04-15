@@ -1,6 +1,7 @@
 package luxus.graphics;
 
 import luxus.GameObject;
+import luxus.Window;
 import luxus.components.Collider;
 import luxus.components.SpriteRenderer;
 
@@ -74,9 +75,13 @@ public class Renderer {
         for (RenderBatch batch : this._batches) {
             batch.render();
         }
+
         // Rendering the debug batch (only for internal purposes).
-        for (DebugRenderBatch debugRenderBatch : this._debugBatches) {
-            debugRenderBatch.render();
+        // We only render the debug components when we are running the scene in debug mode.
+        if (Window.getCurrentScene().isDebugMode()) {
+            for (DebugRenderBatch debugRenderBatch : this._debugBatches) {
+                debugRenderBatch.render();
+            }
         }
     }
 }

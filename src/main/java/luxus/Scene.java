@@ -14,6 +14,7 @@ public abstract class Scene {
     protected Renderer renderer;
 
     private boolean _isRunning;
+    private boolean _isDebugMode;
     private List<Collider> _collidersInScene;
 
     public Scene() {
@@ -56,6 +57,14 @@ public abstract class Scene {
 
     public List<Collider> getCollidersInScene() {
         return this._collidersInScene;
+    }
+
+    public void setIsDebugMode(boolean debugMode) {
+        this._isDebugMode = debugMode;
+    }
+
+    public boolean isDebugMode() {
+        return this._isDebugMode;
     }
 
 }
