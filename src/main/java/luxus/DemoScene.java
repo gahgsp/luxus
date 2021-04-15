@@ -5,6 +5,7 @@ import luxus.components.CharacterController;
 import luxus.components.Collider;
 import luxus.components.SpriteRenderer;
 import luxus.graphics.Animation;
+import luxus.graphics.Sprite;
 import luxus.graphics.Spritesheet;
 import luxus.input.Keyboard;
 import luxus.utils.AssetPool;
@@ -51,6 +52,11 @@ public class DemoScene extends Scene {
         object1.addComponent(new CharacterController());
         object1.addComponent(new Collider());
         this.addGameObjectToScene(object1);
+
+        GameObject object2 = new GameObject("Object 2", new Transform(new Vector2f(300, 100), new Vector2f(32, 32)));
+        object2.addComponent(new SpriteRenderer(new Sprite(AssetPool.getTexture("assets/images/fire_arrow.png"))));
+        object2.addComponent(new Collider());
+        this.addGameObjectToScene(object2);
     }
 
     @Override

@@ -1,11 +1,10 @@
 package luxus.components;
 
-import luxus.Component;
 import luxus.input.Keyboard;
 import org.joml.Vector2f;
 import org.lwjgl.glfw.GLFW;
 
-public class CharacterController extends Component {
+public class CharacterController extends MovementController {
 
     private Vector2f _position = new Vector2f(0f, 0f);
     private Vector2f _velocity = new Vector2f(100f, 100f);
@@ -62,5 +61,15 @@ public class CharacterController extends Component {
         } else {
             this._hasVerticalMovement = false;
         }
+    }
+
+    @Override
+    public boolean hasHorizontalMovement() {
+        return this._hasHorizontalMovement;
+    }
+
+    @Override
+    public boolean hasVerticalMovement() {
+        return this._hasVerticalMovement;
     }
 }
