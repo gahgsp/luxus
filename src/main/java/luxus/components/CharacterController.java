@@ -36,31 +36,31 @@ public class CharacterController extends MovementController {
     }
 
     private void moveHorizontally(float deltaTime) {
+        int dx = 0;
         if (Keyboard.isKeyPressed(GLFW.GLFW_KEY_D)) {
-            this._position.x += this._velocity.x * deltaTime;
+            dx = 1;
             this._spriteRenderer.playAnimation("RightRunning");
-            this._hasHorizontalMovement = true;
         } else if (Keyboard.isKeyPressed(GLFW.GLFW_KEY_A)) {
-            this._position.x -= this._velocity.x * deltaTime;
+            dx = -1;
             this._spriteRenderer.playAnimation("LeftRunning");
-            this._hasHorizontalMovement = true;
-        } else {
-            this._hasHorizontalMovement = false;
         }
+
+        this._position.x += this._velocity.x * deltaTime * dx;
+        this._hasHorizontalMovement = dx != 0;
     }
 
     private void moveVertically(float deltaTime) {
+        int dy = 0;
         if (Keyboard.isKeyPressed(GLFW.GLFW_KEY_W)) {
-            this._position.y += this._velocity.y * deltaTime;
+            dy = 1;
             this._spriteRenderer.playAnimation("TopRunning");
-            this._hasVerticalMovement = true;
         } else if (Keyboard.isKeyPressed(GLFW.GLFW_KEY_S)) {
-            this._position.y -= this._velocity.y * deltaTime;
+            dy = -1;
             this._spriteRenderer.playAnimation("BottomRunning");
-            this._hasVerticalMovement = true;
-        } else {
-            this._hasVerticalMovement = false;
         }
+
+        this._position.y += this._velocity.y * deltaTime * dy;
+        this._hasVerticalMovement = dy != 0;
     }
 
     @Override
