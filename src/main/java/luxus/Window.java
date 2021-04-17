@@ -40,7 +40,7 @@ public class Window {
     private static Window singletonInstance = null;
     private static Scene currentScene = null;
 
-    private int _width, _height;
+    private static int _width, _height;
     private String _title;
     private long _glfwWindow;
 
@@ -170,5 +170,21 @@ public class Window {
             deltaTime = frameEndTime - frameBeginTime;
             frameBeginTime = frameEndTime;
         }
+    }
+
+    /**
+     * Returns the width of the screen.
+     * @return the width of the screen.
+     */
+    public static int getWidth() {
+        return _width;
+    }
+
+    /**
+     * Returns the height of the screen.
+     * @return the height of the screen.
+     */
+    public static int getHeight() {
+        return _height;
     }
 }

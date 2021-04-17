@@ -16,11 +16,13 @@ import java.util.HashMap;
 
 public class DemoScene extends Scene {
 
+    private GameObject _mainCharacter;
+
     public DemoScene() {}
 
     @Override
     public void init() {
-        this._camera = new Camera(new Vector2f(0, 0));
+        this._camera = new Camera();
 
         Map map = new Map("", 16, 16, 32);
         map.loadMap();
@@ -47,11 +49,11 @@ public class DemoScene extends Scene {
         playerAnimations.put("TopRunning", new Animation(topSprites, 0.05f, 10,true));
         playerAnimations.put("RightRunning", new Animation(rightSprites, 0.05f, 10,true));
 
-        GameObject object1 = new GameObject("Object 1", new Transform(new Vector2f(100, 100), new Vector2f(64, 64)));
-        object1.addComponent(new SpriteRenderer(playerAnimations));
-        object1.addComponent(new CharacterController());
-        object1.addComponent(new Collider());
-        this.addGameObjectToScene(object1);
+        _mainCharacter = new GameObject("Object 1", new Transform(new Vector2f(100, 100), new Vector2f(64, 64)));
+        _mainCharacter.addComponent(new SpriteRenderer(playerAnimations));
+        _mainCharacter.addComponent(new CharacterController());
+        _mainCharacter.addComponent(new Collider());
+        this.addGameObjectToScene(_mainCharacter);
 
         GameObject object2 = new GameObject("Object 2", new Transform(new Vector2f(300, 100), new Vector2f(32, 32)));
         object2.addComponent(new SpriteRenderer(new Sprite(AssetPool.getTexture("assets/images/fire_arrow.png"))));
@@ -68,6 +70,8 @@ public class DemoScene extends Scene {
         for (int index = 0; index < this.gameObjects.size(); index++) {
             this.gameObjects.get(index).update(deltaTime);
         }
+
+        this._camera.smoothFollow(_mainCharacter.getTransform());
         this.renderer.render();
     }
 }
